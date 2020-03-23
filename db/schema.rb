@@ -10,7 +10,15 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_03_21_191224) do
+ActiveRecord::Schema.define(version: 2020_03_21_191911) do
+
+  create_table "logins", force: :cascade do |t|
+    t.integer "user_id"
+    t.datetime "date"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_logins_on_user_id", unique: true
+  end
 
   create_table "users", force: :cascade do |t|
     t.string "first_string"
