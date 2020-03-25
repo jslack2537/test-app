@@ -6,10 +6,14 @@
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
 require 'json'
+encrypted_password = '#$taawktljasktlw4aaglj'
 file = File.read('db/people.json')
 data_hash = JSON.parse(file)
-
 records = JSON.parse(File.read('db/people.json'))
+
 records.each do |record|
-User.create!(record)
+    records['encrypted_password' => encrypted_password]
+    user = User.create!(record.except('logins'))
+    user.logins.create(record['logins'])
+
 end
